@@ -1,3 +1,4 @@
+echo 'my zshrc'
 # Enable persistent history
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
@@ -31,3 +32,15 @@ eval "$(starship init zsh)"
 
 # my custom aliases
 alias switch-zsh='mv ~/.zshrc2 ~/.zshrc-tmp; mv ~/.zshrc ~/.zshrc2; mv ~/.zshrc-tmp ~/.zshrc'
+alias zig="/home/vkdev/Downloads/zig-x86_64-linux-0.16.0-dev.233+a0ec4e270/zig"
+alias switch-zsh='mv ~/.zshrc2 ~/.zshrc-tmp; mv ~/.zshrc ~/.zshrc2; mv ~/.zshrc-tmp ~/.zshrc'
+
+# config folder
+source /home/vkdev/my-zsh-configs/command-line-fzf.sh
+# key binding ctrl+r for fzf or alt-c
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+
+source /home/vkdev/my-zsh-configs/bluetooth-connection.sh
+alias copad="btconnect D4:57:63:5D:62:EE"
+alias dicopad="btdisconnect D4:57:63:5D:62:EE"
+

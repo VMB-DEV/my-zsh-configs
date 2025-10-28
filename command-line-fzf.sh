@@ -1,11 +1,9 @@
-# Actually initializes the completion system, which enables tab completion in zsh
-autoload -U compinit; compinit
-
 # Get the directory where this script is located
 SCRIPT_DIR="${${(%):-%x}:A:h}"
 
 # Define the fzf-tab plugin directory (in this config folder)
 FZF_TAB_DIR="${SCRIPT_DIR}/fzf-tab"
+FZF_COMPLETION_DIR="${SCRIPT_DIR}/fzf-zsh-completions"
 
 # Check if fzf-tab is installed, if not clone it
 if [[ ! -d "$FZF_TAB_DIR" ]]; then
@@ -21,5 +19,10 @@ if [[ ! -d "$FZF_TAB_DIR" ]]; then
     fi
 fi
 
+
 # Source the fzf-tab plugin
 source "$FZF_TAB_DIR/fzf-tab.plugin.zsh"
+
+# Set up fzf key bindings and fuzzy completion (for fzf < 0.48.0)
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+
