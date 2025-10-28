@@ -17,7 +17,7 @@ setopt autocd
 alias l='ls -lah'
 alias la='ls -lAh'
 alias ll='ls -lh'
-alias ls='ls -G'
+alias ls='ls --color=auto'
 alias lsa='ls -lah'
 
 # Set up fzf key bindings and fuzzy completion
@@ -27,6 +27,14 @@ alias lsa='ls -lah'
 eval "$(zoxide init zsh)"
 
 # Set up the Starship prompt
+# for a nerdfont
+#mkdir -p ~/.local/share/fonts
+#cd ~/.local/share/fonts
+#wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip
+#unzip JetBrainsMono.zip
+#rm JetBrainsMono.zip
+#fc-cache -fv
+
 eval "$(starship init zsh)"
 
 
