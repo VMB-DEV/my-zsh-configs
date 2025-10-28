@@ -2,8 +2,8 @@
 # 
 # Just source the file in your .zshrc and use it for easy aliases, for exemple:
 # source my-zsh-configs/bluetooth-connection.sh
-# alias coearbuds="btconnect [<some-mac-address>]"
-# alias discoearbuds="btdisconnect [<some-mac-address>]"
+# alias coearbuds="btconnect <some-mac-address>"
+# alias discoearbuds="btdisconnect <some-mac-address>"
 
 
 
