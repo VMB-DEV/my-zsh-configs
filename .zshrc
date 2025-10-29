@@ -42,6 +42,8 @@ eval "$(dircolors -b)"
 
 
 # config folder
+# syntax highlighting in the command
+source /home/vkdev/my-zsh-configs/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 # vi mode in command line
 source /home/vkdev/my-zsh-configs/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
