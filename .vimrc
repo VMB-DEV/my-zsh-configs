@@ -20,5 +20,5 @@ set history=1000
 " color desert
 " color lunaperche
 " color wildcharm
-" color habamax
-color slate
+" color slate
+color habamax
