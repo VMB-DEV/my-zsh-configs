@@ -41,11 +41,6 @@ eval "$(dircolors -b)"
 #"
 
 
-# my custom aliases
-alias switch-zsh='mv ~/.zshrc2 ~/.zshrc-tmp; mv ~/.zshrc ~/.zshrc2; mv ~/.zshrc-tmp ~/.zshrc'
-alias zig="/home/vkdev/Downloads/zig-x86_64-linux-0.16.0-dev.233+a0ec4e270/zig"
-alias switch-zsh='mv ~/.zshrc2 ~/.zshrc-tmp; mv ~/.zshrc ~/.zshrc2; mv ~/.zshrc-tmp ~/.zshrc'
-
 # config folder
 # vi mode in command line
 source /home/vkdev/my-zsh-configs/zsh-vi-mode/zsh-vi-mode.plugin.zsh
@@ -70,6 +65,23 @@ alias la='ls -lAh'
 alias ll='ls -lh'
 alias ls='ls --color=auto'
 alias lsa='ls -lah'
+
+# my custom aliases
+alias zig="/home/vkdev/Downloads/zig-x86_64-linux-0.16.0-dev.233+a0ec4e270/zig"
+alias intellij="~/.local/share/JetBrains/Toolbox/apps/intellij-idea-ultimate/bin/idea"
+alias cl="clear" 
+alias nr="npm run" 
+alias k="kubectl" 
+alias kctx="kubectx" 
+alias kns="kubens" 
+alias klocal="cp ~/.kube/config-local ~/.kube/config" 
+alias kremote="cp ~/.kube/config-remote ~/.kube/config" 
+alias kaf="kubectl apply -f" 
+alias kak="kubectl apply -k" 
+alias kdl="kubectl delete" 
+
+alias switch-zsh='mv ~/.zshrc2 ~/.zshrc-tmp; mv ~/.zshrc ~/.zshrc2; mv ~/.zshrc-tmp ~/.zshrc'
+
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
