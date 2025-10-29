@@ -1,5 +1,7 @@
 # Put in ~/.config/starship.toml
 
+add_newline = false
+
 [line_break]
 disabled = false
 
