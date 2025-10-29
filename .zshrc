@@ -33,12 +33,12 @@ eval "$(starship init zsh)"
 eval "$(dircolors -b)"
 
 # Configure fzf colors
-export FZF_DEFAULT_OPTS="
-  --color=fg:#c0caf5,bg:#1a1b26,hl:#7aa2f7
-  --color=fg+:#c0caf5,bg+:#292e42,hl+:#7dcfff
-  --color=info:#7aa2f7,prompt:#7dcfff,pointer:#7dcfff
-  --color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a
-"
+#export FZF_DEFAULT_OPTS="
+#  --color=fg:#c0caf5,bg:#1a1b26,hl:#7aa2f7
+#  --color=fg+:#c0caf5,bg+:#292e42,hl+:#7dcfff
+#  --color=info:#7aa2f7,prompt:#7dcfff,pointer:#7dcfff
+#  --color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a
+#"
 
 
 # my custom aliases
@@ -70,4 +70,8 @@ alias la='ls -lAh'
 alias ll='ls -lh'
 alias ls='ls --color=auto'
 alias lsa='ls -lah'
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
