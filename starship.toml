@@ -2,14 +2,35 @@
 
 add_newline = false
 
+# First line: directory on left, git/kubernetes on right, then second line with character
+format = """$directory$fill$git_branch$git_status$kubernetes$nodejs$python$rust$golang$line_break$character"""
+
+[directory]
+truncation_length = 100
+truncate_to_repo = false
+home_symbol = "~"
+format = "[$path]($style)[$read_only]($read_only_style) "
+
+[directory.substitutions]
+"~/" = "_"
+
+[fill]
+symbol = " "
+
 [line_break]
 disabled = false
 
 [character]
 success_symbol = "[⩥](bold green)"
-error_symbol = "[⩥](bold gray)"
+error_symbol = "[⩥](bold 218)"
 vicmd_symbol = "[▣](bold 208)"
 
 [kubernetes]
 disabled = false
 format = '[\[k8s: $context\($namespace\)\]](bold blue) '
+
+[git_branch]
+format = "[$symbol$branch]($style) "
+
+[git_status]
+format = '[\[$all_status$ahead_behind\]]($style) '
