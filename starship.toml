@@ -30,6 +30,7 @@ disabled = false
 format = '[\[k8s: $context\($namespace\)\]](bold blue) '
 
 [git_branch]
+symbol = "⎇  "
 format = "[$symbol$branch]($style) "
 
 [git_status]
