@@ -1,0 +1,11 @@
+# Put in ~/.config/starship.toml
+
+[line_break]
+disabled = false
+
+[character]
+vicmd_symbol = "[█](bold yellow)"
+
+[kubernetes]
+disabled = false
+format = '[\[k8s: $context\($namespace\)\]](bold blue) '
