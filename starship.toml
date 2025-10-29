@@ -6,7 +6,9 @@ add_newline = false
 disabled = false
 
 [character]
-vicmd_symbol = "[█](bold yellow)"
+success_symbol = "[⩥](bold green)"
+error_symbol = "[⩥](bold gray)"
+vicmd_symbol = "[▣](bold 208)"
 
 [kubernetes]
 disabled = false
