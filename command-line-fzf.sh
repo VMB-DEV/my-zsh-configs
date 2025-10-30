@@ -23,6 +23,9 @@ fi
 # Source the fzf-tab plugin
 source "$FZF_TAB_DIR/fzf-tab.plugin.zsh"
 
+# Bind arrow down to trigger completion
+bindkey '^[[B' fzf-tab-complete
+
 # Configure fzf-tab to show colors
 #zstyle ':fzf-tab:*' fzf-flags --color=fg:7,bg:-1,hl:4,fg+:7,bg+:0,hl+:12,info:6,prompt:4,pointer:12,marker:2,spinner:6,header:4
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}

@@ -61,6 +61,9 @@ source /home/vkdev/my-zsh-configs/bluetooth-connection.sh
 alias copad="btconnect D4:57:63:5D:62:EE"
 alias dicopad="btdisconnect D4:57:63:5D:62:EE"
 
+# Giving kubectl command completion 
+source <(kubectl completion zsh)
+
 # The most important aliases ever (the only thing I borrowed from OMZ)
 alias l='ls -lah'
 alias la='ls -lAh'
