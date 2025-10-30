@@ -27,7 +27,7 @@ vicmd_symbol = "[▣](bold 208)"
 
 [kubernetes]
 disabled = false
-format = '[\[k8s: $context\($namespace\)\]](bold blue) '
+format = '[  [$context](bold blue)[:](blue)[$namespace](bold blue) ](bold blue)'
 
 [git_branch]
 symbol = "⎇  "
