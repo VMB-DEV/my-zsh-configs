@@ -17,6 +17,8 @@ set noshiftround
 set showmode
 set history=1000
 
+set mouse=a
+
 " color desert
 " color lunaperche
 " color wildcharm
