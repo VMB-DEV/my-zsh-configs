@@ -94,12 +94,30 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# Display ASCII art matching terminal width on startup (new windows only)
+if [[ -o interactive && -z "$ASCII_ART_SHOWN" ]]; then
+  export ASCII_ART_SHOWN=1
 
-# Display ASCII art on startup, clear on first keystroke
-#if [[ -o interactive ]]; then
-# cat /home/vkdev/my-zsh-configs/test.txt
-# read -k1 first_key
-# clear
-# print -z "$first_key"
-#fi
+  # Get terminal width
+  term_width=$COLUMNS
+
+  # Round DOWN to nearest multiple of 5
+  art_width=$(( term_width / 5 * 5 ))
+
+  # Only display if width is between 40 and 200
+  if (( art_width >= 40 && art_width <= 200 )); then
+    art_file="/home/vkdev/my-zsh-configs/img1/img1-${art_width}.txt"
+
+    if [[ -f "$art_file" ]]; then
+      cat "$art_file"
+      read -k1 first_key
+      clear
+
+      # Only preserve keystroke if it's not Escape or whitespace
+      if [[ "$first_key" != $'\e' && "$first_key" != " " && "$first_key" != $'\t' && "$first_key" != $'\n' ]]; then
+        print -z "$first_key"
+      fi
+    fi
+  fi
+fi
 
