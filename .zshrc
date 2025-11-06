@@ -72,7 +72,7 @@ alias ls='ls --color=auto'
 alias lsa='ls -lah'
 
 # my custom aliases
-alias zig="/home/vkdev/Downloads/zig-x86_64-linux-0.16.0-dev.233+a0ec4e270/zig"
+alias zig="/home/vkdev/zig/zig"
 alias intellij="~/.local/share/JetBrains/Toolbox/apps/intellij-idea-ultimate/bin/idea"
 alias cl="clear" 
 alias nr="npm run" 
