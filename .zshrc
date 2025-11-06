@@ -8,6 +8,8 @@ setopt INC_APPEND_HISTORY
 
 # Initialize completion
 autoload -U compinit; compinit
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
 
 # Move to directories without cd
 setopt autocd
