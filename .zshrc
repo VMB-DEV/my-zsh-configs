@@ -94,3 +94,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+
+# Display ASCII art on startup, clear on first keystroke
+#if [[ -o interactive ]]; then
+# cat /home/vkdev/my-zsh-configs/test.txt
+# read -k1 first_key
+# clear
+# print -z "$first_key"
+#fi
+
