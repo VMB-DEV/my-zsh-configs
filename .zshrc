@@ -89,6 +89,10 @@ alias kdl="kubectl delete"
 
 alias switch-zsh='mv ~/.zshrc2 ~/.zshrc-tmp; mv ~/.zshrc ~/.zshrc2; mv ~/.zshrc-tmp ~/.zshrc'
 
+# Check if zig exist
+if [ ! -d "$HOME/zig" ]; then
+  echo "$HOME/zig does not exist."
+fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
