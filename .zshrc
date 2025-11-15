@@ -42,6 +42,9 @@ eval "$(dircolors -b)"
 #  --color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a
 #"
 
+# Getting all the executable in ~/bin folder
+#echo 'export PATH=~/bin:$PATH' >> ~/.bash_profile
+export PATH=~/bin:$PATH
 
 # config folder
 # syntax highlighting in the command
@@ -97,6 +100,7 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 
 # Display ASCII art matching terminal width on startup (new windows only)
 if [[ -o interactive && -z "$ASCII_ART_SHOWN" ]]; then
