@@ -42,6 +42,8 @@ eval "$(dircolors -b)"
 #  --color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a
 #"
 
+GOPATH=$HOME/gopath
+export GOPATH
 # Getting all the executable in ~/bin folder
 #echo 'export PATH=~/bin:$PATH' >> ~/.bash_profile
 export PATH=~/bin:$PATH
