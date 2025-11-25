@@ -89,6 +89,8 @@ alias kremote="cp ~/.kube/config-remote ~/.kube/config"
 alias kaf="kubectl apply -f" 
 alias kak="kubectl apply -k" 
 alias kdl="kubectl delete" 
+alias zt="zegemaType" 
+alias update-discord="bash $HOME/my-zsh-config/update-discord.sh"
 
 alias switch-zsh='mv ~/.zshrc2 ~/.zshrc-tmp; mv ~/.zshrc ~/.zshrc2; mv ~/.zshrc-tmp ~/.zshrc'
 
