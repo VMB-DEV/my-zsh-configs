@@ -96,6 +96,8 @@ alias update-discord="bash $HOME/my-zsh-configs/update-discord.sh"
 
 alias switch-zsh='mv ~/.zshrc2 ~/.zshrc-tmp; mv ~/.zshrc ~/.zshrc2; mv ~/.zshrc-tmp ~/.zshrc'
 
+alias hdr='mpv --vo=gpu-next --target-colorspace-hint --gpu-api=vulkan'
+
 # Check if zig exist
 if [ ! -d "$HOME/zig" ]; then
   echo "$HOME/zig does not exist."
