@@ -1,6 +1,7 @@
 " Show line number absolute and relatives
 set rnu
 set nu
+set nowrap
 " Show syntax
 syntax on
 " Show file stats
