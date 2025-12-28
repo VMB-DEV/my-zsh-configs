@@ -64,9 +64,28 @@ function zvm_after_init() {
 alias ls='ls --color=auto'
 }
 
+# todo: put this in the bluetooth-connection.sh
+# list the bluetooth device in the ~/.bluetoot_devices file this way : <MAC-ADDRESSE>|device_name
+BT_DEVICE_FILE="$HOME/.bluetooth_devices"
 source /home/vkdev/my-zsh-configs/bluetooth-connection.sh
-alias copad="btconnect D4:57:63:5D:62:EE"
-alias dicopad="btdisconnect D4:57:63:5D:62:EE"
+
+if [[ -f "$BT_DEVICE_FILE" ]]; then
+    # Use || [[ -n "$mac" ]] to ensure the last line is read even if it has no newline
+    while IFS='|' read -r mac name || [[ -n "$mac" ]]; do
+        
+        # 1. Clean the variables: Remove spaces, tabs, and carriage returns (\r)
+        mac="${mac//[$'\t\r\n ']/}"
+        name="${name//[$'\t\r\n ']/}"
+
+        # 2. Skip empty lines or comments
+        [[ -z "$mac" || "$mac" == \#* ]] && continue
+
+        # 3. Create the aliases
+        alias "disco${name}"="btdisconnect $mac"
+        alias "co${name}"="btconnect $mac"
+        
+    done < "$BT_DEVICE_FILE"
+fi
 
 # Giving kubectl command completion 
 source <(kubectl completion zsh)
