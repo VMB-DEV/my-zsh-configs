@@ -1,3 +1,5 @@
+# Just source this file at the begining of your ~/.zshrc
+
 # Enable persistent history
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
