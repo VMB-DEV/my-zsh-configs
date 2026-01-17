@@ -49,6 +49,7 @@ export GOPATH
 # Getting all the executable in ~/bin folder
 #echo 'export PATH=~/bin:$PATH' >> ~/.bash_profile
 export PATH=~/bin:$PATH
+export PATH=~/gopath/bin:$PATH
 
 # config folder
 # syntax highlighting in the command
