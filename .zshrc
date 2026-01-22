@@ -44,8 +44,11 @@ eval "$(dircolors -b)"
 #  --color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a
 #"
 
-GOPATH=$HOME/gopath
-export GOPATH
+export GOPATH=$HOME/gopath
+export ANDROID_HOME="$HOME/Android/Sdk"
+export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$JAVA_HOME/bin:$PATH"
+
 # Getting all the executable in ~/bin folder
 #echo 'export PATH=~/bin:$PATH' >> ~/.bash_profile
 export PATH=~/bin:$PATH
