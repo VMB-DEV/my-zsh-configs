@@ -48,6 +48,7 @@ export GOPATH=$HOME/gopath
 export ANDROID_HOME="$HOME/Android/Sdk"
 export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
 export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$JAVA_HOME/bin:$PATH"
+export LAUNCH_EDITOR="idea"
 
 # Getting all the executable in ~/bin folder
 #echo 'export PATH=~/bin:$PATH' >> ~/.bash_profile
@@ -118,6 +119,7 @@ alias kak="kubectl apply -k"
 alias kdl="kubectl delete" 
 alias zt="zegemaType" 
 alias update-discord="bash $HOME/my-zsh-configs/update-discord.sh"
+alias idea"$HOME/local/share/JetBrains/Toolbox/apps/intellij-idea/bin/idea"
 
 alias switch-zsh='mv ~/.zshrc2 ~/.zshrc-tmp; mv ~/.zshrc ~/.zshrc2; mv ~/.zshrc-tmp ~/.zshrc'
 
