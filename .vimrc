@@ -26,3 +26,7 @@ set mouse=a
 " color wildcharm
 " color slate
 color habamax
+
+" Make counted j/k motions add to jump list
+nnoremap <expr> j (v:count > 1 ? "m'" . v:count : "") . 'j'
+nnoremap <expr> k (v:count > 1 ? "m'" . v:count : "") . 'k'
