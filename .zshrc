@@ -77,24 +77,6 @@ BT_DEVICE_FILE="$HOME/.bluetooth_devices"
 export BT_DEVICE_FILE
 source /home/vkdev/my-zsh-configs/bluetooth-connection.sh
 
-if [[ -f "$BT_DEVICE_FILE" ]]; then
-    # Use || [[ -n "$mac" ]] to ensure the last line is read even if it has no newline
-    while IFS='|' read -r mac name || [[ -n "$mac" ]]; do
-        
-        # 1. Clean the variables: Remove spaces, tabs, and carriage returns (\r)
-        mac="${mac//[$'\t\r\n ']/}"
-        name="${name//[$'\t\r\n ']/}"
-
-        # 2. Skip empty lines or comments
-        [[ -z "$mac" || "$mac" == \#* ]] && continue
-
-        # 3. Create the aliases
-        alias "disco${name}"="btdisconnect $mac"
-        alias "co${name}"="btconnect $mac"
-        
-    done < "$BT_DEVICE_FILE"
-fi
-
 # Giving kubectl command completion 
 source <(kubectl completion zsh)
 
@@ -120,7 +102,8 @@ alias kak="kubectl apply -k"
 alias kdl="kubectl delete" 
 alias zt="zegemaType" 
 alias update-discord="bash $HOME/my-zsh-configs/update-discord.sh"
-alias idea"$HOME/local/share/JetBrains/Toolbox/apps/intellij-idea/bin/idea"
+alias idea="$HOME/local/share/JetBrains/Toolbox/apps/intellij-idea/bin/idea"
+alias bt="$HOME/my-zsh-configs/go-cli/bluetooth-connection/bluetooth-connection"
 
 alias switch-zsh='mv ~/.zshrc2 ~/.zshrc-tmp; mv ~/.zshrc ~/.zshrc2; mv ~/.zshrc-tmp ~/.zshrc'
 
