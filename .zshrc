@@ -74,6 +74,7 @@ alias ls='ls --color=auto'
 # todo: put this in the bluetooth-connection.sh
 # list the bluetooth device in the ~/.bluetoot_devices file this way : <MAC-ADDRESSE>|device_name
 BT_DEVICE_FILE="$HOME/.bluetooth_devices"
+export BT_DEVICE_FILE
 source /home/vkdev/my-zsh-configs/bluetooth-connection.sh
 
 if [[ -f "$BT_DEVICE_FILE" ]]; then
