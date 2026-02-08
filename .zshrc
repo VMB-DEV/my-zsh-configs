@@ -75,7 +75,6 @@ alias ls='ls --color=auto'
 # list the bluetooth device in the ~/.bluetoot_devices file this way : <MAC-ADDRESSE>|device_name
 BT_DEVICE_FILE="$HOME/.bluetooth_devices"
 export BT_DEVICE_FILE
-source /home/vkdev/my-zsh-configs/bluetooth-connection.sh
 
 # Giving kubectl command completion 
 source <(kubectl completion zsh)
