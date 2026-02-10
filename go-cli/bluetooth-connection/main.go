@@ -9,7 +9,14 @@ import (
 	"strings"
 )
 
+//todo : activate bluetooth if needed
+
 func main() {
+	// fzf check
+	if _, err := exec.LookPath("fzf"); err != nil {
+		panic("fzf is required but not found")
+	}
+
 	// get the file path
 	configFilePath := os.Getenv("BT_DEVICE_FILE")
 	if len(configFilePath) == 0 {
@@ -30,6 +37,9 @@ func main() {
 	for fileScanner.Scan() {
 		fileLines = append(fileLines, fileScanner.Text())
 	}
+	if err := fileScanner.Err(); err != nil {
+		panic("Error reading file " + configFilePath)
+	}
 
 	// parse lines into DeviceData
 	var devices DeviceList
@@ -37,6 +47,9 @@ func main() {
 		if deviceData, err := parseLine(line); err == nil {
 			devices = append(devices, deviceData)
 		}
+	}
+	if len(devices) == 0 {
+		panic("No valid devices found in config file")
 	}
 
 	// build display lines for fzf (name\tdescription)
