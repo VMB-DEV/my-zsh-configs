@@ -1,5 +1,11 @@
 # Just source this file at the begining of your ~/.zshrc
 
+# Check if MY_ZSH_CONFIG_FOLDER_PATH is set
+if [[ -z "$MY_ZSH_CONFIG_FOLDER_PATH" ]]; then
+  echo "Error: MY_ZSH_CONFIG_FOLDER_PATH is not set."
+  return 1
+fi
+
 # Enable persistent history
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
@@ -57,14 +63,14 @@ export PATH=~/gopath/bin:$PATH
 
 # config folder
 # syntax highlighting in the command
-source /home/vkdev/my-zsh-configs/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+source $MY_ZSH_CONFIG_FOLDER_PATH/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 # vi mode in command line
-source /home/vkdev/my-zsh-configs/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source $MY_ZSH_CONFIG_FOLDER_PATH/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 # Fix fzf to work with vi-mode - must be in zvm_after_init hook
 function zvm_after_init() {
   # get fzf at completion
-  source /home/vkdev/my-zsh-configs/command-line-fzf.sh
+  source $MY_ZSH_CONFIG_FOLDER_PATH/command-line-fzf.sh
   # key binding ctrl+r for fzf or alt-c
   source /usr/share/doc/fzf/examples/key-bindings.zsh
 
@@ -130,7 +136,7 @@ if [[ -o interactive && -z "$ASCII_ART_SHOWN" ]]; then
 
   # Only display if width is between 40 and 200
   if (( art_width >= 40 && art_width <= 200 )); then
-    art_file="/home/vkdev/my-zsh-configs/img1/img1-${art_width}.txt"
+    art_file="$MY_ZSH_CONFIG_FOLDER_PATH/img1/img1-${art_width}.txt"
 
     if [[ -f "$art_file" ]]; then
       cat "$art_file"
