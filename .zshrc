@@ -1,4 +1,5 @@
 # Just source this file at the begining of your ~/.zshrc
+# export MY_ZSH_CONFIG_FOLDER_PATH = "this_folder_path"
 
 # Check if MY_ZSH_CONFIG_FOLDER_PATH is set
 if [[ -z "$MY_ZSH_CONFIG_FOLDER_PATH" ]]; then
