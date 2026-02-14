@@ -1,9 +1,11 @@
-# Just source this file at the begining of your ~/.zshrc
-# export MY_ZSH_CONFIG_FOLDER_PATH = "this_folder_path"
+# export MY_ZSH_CONFIG_FOLDER_PATH=\"$HOME/my-zsh-configs\"
+# and then source this file at the begining of your ~/.zshrc
 
 # Check if MY_ZSH_CONFIG_FOLDER_PATH is set
 if [[ -z "$MY_ZSH_CONFIG_FOLDER_PATH" ]]; then
   echo "Error: MY_ZSH_CONFIG_FOLDER_PATH is not set."
+  echo "Please add the line below in you .zshrc "
+  echo "export MY_ZSH_CONFIG_FOLDER_PATH=\"$HOME/my-zsh-configs\""
   return 1
 fi
 
