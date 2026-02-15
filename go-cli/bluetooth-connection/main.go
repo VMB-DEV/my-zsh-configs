@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"errors"
 	"fmt"
 	"os"
@@ -9,7 +10,7 @@ import (
 	"strings"
 )
 
-//todo : activate bluetooth if needed
+//todo : add an option in red to cut off bluetooth
 
 func main() {
 	// fzf check
@@ -21,6 +22,10 @@ func main() {
 	configFilePath := os.Getenv("BT_DEVICE_FILE")
 	if len(configFilePath) == 0 {
 		panic("No BT_DEVICE_FILE env variable defined")
+	}
+
+	if isBluetoothNotPowered() {
+		unblockBluetooth()
 	}
 
 	// read the file
@@ -155,4 +160,33 @@ func (list DeviceList) findElement(name string) (DeviceData, error) {
 		}
 	}
 	return DeviceData{}, errors.New("Could not find the element named " + name)
+}
+
+func isBluetoothNotPowered() bool {
+	bluetoothStatusCmd := exec.Command("bluetoothctl", "show")
+	bluetoothStatusFilteredCmd := exec.Command("grep", "Powered")
+
+	bluetoothStatusFilteredCmd.Stdin, _ = bluetoothStatusCmd.StdoutPipe()
+	var buf bytes.Buffer
+	bluetoothStatusFilteredCmd.Stdout = &buf
+
+	if err := bluetoothStatusFilteredCmd.Start(); err != nil {
+		panic("Failed to start grep: " + err.Error())
+	}
+	if err := bluetoothStatusCmd.Run(); err != nil {
+		panic("Failed to run bluetoothctl show: " + err.Error())
+	}
+	if err := bluetoothStatusFilteredCmd.Wait(); err != nil {
+		panic("Failed to wait for grep: " + err.Error())
+	}
+
+	return strings.Contains(buf.String(), "no")
+}
+
+func unblockBluetooth() {
+	cmd := exec.Command("rfkill", "unblock", "bluetooth")
+	cmd.Stderr = os.Stderr
+	if _, err := cmd.Output(); err != nil {
+		panic("Can not unblock bluetooth")
+	}
 }
