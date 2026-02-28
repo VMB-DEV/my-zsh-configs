@@ -68,6 +68,7 @@ func main() {
 		"--height=~15",            // max 15 lines, shrinks if fewer items
 		"--layout=reverse",        // input prompt at top, results below
 		"--border",                // draw a box around the fzf interface
+		"--cycle",                 // wrap around when reaching top/bottom
 		"--delimiter=\t",          // split input lines by tab character
 		"--with-nth=1",            // display only field 1 (device name) in the list
 		"--preview=echo {2}",      // show field 2 (description) in preview pane
