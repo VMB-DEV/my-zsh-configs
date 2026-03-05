@@ -32,6 +32,13 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color=always $realpath'
 zstyle ':fzf-tab:complete:*:*' fzf-preview '[[ -f $realpath ]] && cat $realpath 2>/dev/null || ls --color=always $realpath 2>/dev/null'
 
-# Set up fzf key bindings and fuzzy completion (for fzf < 0.48.0)
-source /usr/share/doc/fzf/examples/key-bindings.zsh
+# Set up fzf key bindings and fuzzy completion
+if [[ -z "$FZF_KEY_BINDINGS_PATH" ]]; then
+  echo "Warning: FZF_KEY_BINDINGS_PATH is not set. Skipping fzf key bindings."
+  echo "Please add: export FZF_KEY_BINDINGS_PATH=\"/path/to/key-bindings.zsh\" in your ~/.zshrc"
+elif [[ ! -f "$FZF_KEY_BINDINGS_PATH" ]]; then
+  echo "Warning: FZF_KEY_BINDINGS_PATH points to a non-existent file: $FZF_KEY_BINDINGS_PATH"
+else
+  source "$FZF_KEY_BINDINGS_PATH"
+fi
 

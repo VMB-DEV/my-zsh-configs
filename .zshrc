@@ -1,4 +1,4 @@
-# export MY_ZSH_CONFIG_FOLDER_PATH=\"$HOME/my-zsh-configs\"
+# export MY_ZSH_CONFIG_FOLDER_PATH="$HOME/my-zsh-configs"
 # and then source this file at the begining of your ~/.zshrc
 
 # Check if MY_ZSH_CONFIG_FOLDER_PATH is set
@@ -42,8 +42,8 @@ setopt autocd
 
 eval "$(starship init zsh)"
 
-# Set up LS_COLORS for file type coloring
-eval "$(dircolors -b)"
+# Set up LS_COLORS for file type coloring if dircolors command is available 
+command -v dircolors &>/dev/null && eval "$(dircolors -b)"
 
 # Configure fzf colors
 #export FZF_DEFAULT_OPTS="
@@ -66,18 +66,22 @@ export PATH=~/gopath/bin:$PATH
 
 # config folder
 # syntax highlighting in the command
+if [[ ! -d "$MY_ZSH_CONFIG_FOLDER_PATH/zsh-syntax-highlighting" ]]; then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$MY_ZSH_CONFIG_FOLDER_PATH/zsh-syntax-highlighting"
+fi
 source $MY_ZSH_CONFIG_FOLDER_PATH/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 # vi mode in command line
+if [[ ! -d "$MY_ZSH_CONFIG_FOLDER_PATH/zsh-vi-mode" ]]; then
+  git clone https://github.com/jeffreytse/zsh-vi-mode.git "$MY_ZSH_CONFIG_FOLDER_PATH/zsh-vi-mode"
+fi
 source $MY_ZSH_CONFIG_FOLDER_PATH/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 # Fix fzf to work with vi-mode - must be in zvm_after_init hook
 function zvm_after_init() {
-  # get fzf at completion
+  # get fzf at completion and key bindings (ctrl+r, alt-c)
   source $MY_ZSH_CONFIG_FOLDER_PATH/command-line-fzf.sh
-  # key binding ctrl+r for fzf or alt-c
-  source /usr/share/doc/fzf/examples/key-bindings.zsh
 
-alias ls='ls --color=auto'
+  alias ls='ls --color=auto'
 }
 
 # todo: put this in the bluetooth-connection.sh
@@ -96,7 +100,6 @@ alias ls='ls --color=auto'
 alias lsa='ls -lah'
 
 # my custom aliases
-alias zig="/home/vkdev/zig/zig"
 alias intellij="~/.local/share/JetBrains/Toolbox/apps/intellij-idea-ultimate/bin/idea"
 alias cl="clear" 
 alias nr="npm run" 
@@ -119,7 +122,9 @@ alias hdr='mpv --vo=gpu-next --target-colorspace-hint --gpu-api=vulkan'
 
 # Check if zig exist
 if [ ! -d "$HOME/zig" ]; then
-  echo "$HOME/zig does not exist."
+  alias zig="$HOME/zig/zig"
+else 
+  alias zig="echo "$HOME/zig does not exist.""
 fi
 
 export NVM_DIR="$HOME/.nvm"
