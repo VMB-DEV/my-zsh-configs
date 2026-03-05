@@ -133,7 +133,7 @@ export NVM_DIR="$HOME/.nvm"
 
 
 # Display ASCII art matching terminal width on startup (new windows only)
-if [[ -o interactive && -z "$ASCII_ART_SHOWN" ]]; then
+if [[ -o interactive && -z "$ASCII_ART_SHOWN" && -z "$SSH_CONNECTION" ]]; then
   export ASCII_ART_SHOWN=1
 
   # Get terminal width
