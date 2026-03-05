@@ -1,9 +1,19 @@
 # Put in ~/.config/starship.toml
 
-add_newline = false
+add_newline = true
 
 # First line: directory on left, git/kubernetes on right, then second line with character
-format = """$directory$fill$git_branch$git_status$kubernetes$nodejs$python$rust$golang$line_break$character"""
+format = """$time$username$hostname$directory$fill$git_branch$git_status$kubernetes$nodejs$python$rust$golang$line_break$character"""
+
+[username]
+show_always = true
+format = "[$user]($style)[@](orange)"
+style_user = "yellow"
+
+[hostname]
+ssh_only = false
+format = "[$hostname]($style) "
+style = "yellow"
 
 [directory]
 truncation_length = 100
@@ -35,3 +45,9 @@ format = "[$symbol$branch]($style) "
 
 [git_status]
 format = '([\[$all_status$ahead_behind\]]($style) )'
+
+[time]
+disabled = false
+format = '[$time]($style) '
+time_format = "%H:%M"
+style = "dimmed yellow"
