@@ -3,7 +3,7 @@
 add_newline = true
 
 # First line: directory on left, git/kubernetes on right, then second line with character
-format = """$time$username$hostname$directory$fill$git_branch$git_status$kubernetes$nodejs$python$rust$golang$line_break$character"""
+format = """$env_var_SSH_CONNECTION$time$username$hostname$directory$fill$git_branch$git_status$kubernetes$nodejs$python$rust$golang$line_break$character"""
 
 [username]
 show_always = true
@@ -51,3 +51,8 @@ disabled = false
 format = '[$time]($style) '
 time_format = "%H:%M"
 style = "dimmed yellow"
+
+[env_var.SSH_CONNECTION]
+variable = "SSH_CONNECTION"
+format = "[SSH ]($style)"
+style = "red" 
