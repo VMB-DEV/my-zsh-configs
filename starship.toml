@@ -46,14 +46,14 @@ format = "[$symbol$branch]($style) "
 [git_status]
 format = '([\[$all_status$ahead_behind\]]($style) )'
 
-[time]
-disabled = false
-format = '[$time]($style) '
-time_format = "%H:%M"
-style = "dimmed yellow"
-                                                                                                                                                              
-[custom.ssh]                                                                                                                                                
-command = "echo 'SSH'"                                                                                                                                      
+[custom.ssh]
+command = "echo '.SSH.'"
 when = '[ -n "$SSH_CONNECTION" ]'                                                                                                                           
 format = "[$output]($style) "                                                                                                                               
-style = "bold red"                
+style = "bold red"
+
+[custom.time]
+command = "date +%H:%M"
+when = '[ -z "$SSH_CONNECTION" ]'
+format = '[$output]($style) '
+style = "dimmed yellow"
