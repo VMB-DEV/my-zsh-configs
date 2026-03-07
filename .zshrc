@@ -132,30 +132,64 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
-# Display ASCII art matching terminal width on startup (new windows only)
+# # Display ASCII art matching terminal width on startup (new windows only)
+# if [[ -o interactive && -z "$ASCII_ART_SHOWN" && -z "$SSH_CONNECTION" ]]; then
+#   export ASCII_ART_SHOWN=1
+#
+#   # Get terminal width
+#   term_width=$COLUMNS
+#
+#   # Round DOWN to nearest multiple of 5
+#   art_width=$(( term_width / 5 * 5 ))
+#
+#   # Only display if width is between 40 and 200
+#   if (( art_width >= 40 && art_width <= 200 )); then
+#     art_file="$MY_ZSH_CONFIG_FOLDER_PATH/img1/img1-${art_width}.txt"
+#
+#     if [[ -f "$art_file" ]]; then
+#       cat "$art_file"
+#       read -k1 first_key
+#       clear
+#
+#       # Only preserve keystroke if it's not Escape or whitespace
+#       if [[ "$first_key" != $'\e' && "$first_key" != " " && "$first_key" != $'\t' && "$first_key" != $'\n' ]]; then
+#         print -z "$first_key"
+#       fi
+#     fi
+#   fi
+# fi
+
+# Play ASCII art animation on startup (~30fps)
 if [[ -o interactive && -z "$ASCII_ART_SHOWN" && -z "$SSH_CONNECTION" ]]; then
   export ASCII_ART_SHOWN=1
 
-  # Get terminal width
-  term_width=$COLUMNS
+  ascii_frames_dir="$MY_ZSH_CONFIG_FOLDER_PATH/gif-ascii/ascii-frames"
 
-  # Round DOWN to nearest multiple of 5
-  art_width=$(( term_width / 5 * 5 ))
+  if [[ -d "$ascii_frames_dir" ]]; then
+    # Switch to alternate screen buffer and hide cursor
+    tput smcup
+    tput civis
 
-  # Only display if width is between 40 and 200
-  if (( art_width >= 40 && art_width <= 200 )); then
-    art_file="$MY_ZSH_CONFIG_FOLDER_PATH/img1/img1-${art_width}.txt"
+    printf '\033[2J'
+    local key_pressed=""
+    while true; do
+      for frame in "$ascii_frames_dir"/frame_*.txt(n); do
+        printf '\033[H'
+        cat "$frame"
+        # Wait 33ms for a keypress; if pressed, stop the loop
+        if read -t 0.033 -k1 key_pressed; then
+          break 2
+        fi
+      done
+    done
 
-    if [[ -f "$art_file" ]]; then
-      cat "$art_file"
-      read -k1 first_key
-      clear
+    # Restore cursor and switch back to normal screen
+    tput cnorm
+    tput rmcup
 
-      # Only preserve keystroke if it's not Escape or whitespace
-      if [[ "$first_key" != $'\e' && "$first_key" != " " && "$first_key" != $'\t' && "$first_key" != $'\n' ]]; then
-        print -z "$first_key"
-      fi
+    # Preserve keystroke if it's not Escape or whitespace
+    if [[ "$key_pressed" != $'\e' && "$key_pressed" != " " && "$key_pressed" != $'\t' && "$key_pressed" != $'\n' ]]; then
+      print -z "$key_pressed"
     fi
   fi
 fi
-
