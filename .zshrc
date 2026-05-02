@@ -115,6 +115,7 @@ alias zt="zegemaType"
 alias update-discord="bash $HOME/my-zsh-configs/update-discord.sh"
 alias idea="$HOME/local/share/JetBrains/Toolbox/apps/intellij-idea/bin/idea"
 alias bt="$MY_ZSH_CONFIG_FOLDER_PATH/go-cli/bluetooth-connection/bluetooth-connection"
+alias etf="$MY_ZSH_CONFIG_FOLDER_PATH/go-cli/etf/etf"
 alias code="intellij"
 
 alias switch-zsh='mv ~/.zshrc2 ~/.zshrc-tmp; mv ~/.zshrc ~/.zshrc2; mv ~/.zshrc-tmp ~/.zshrc'
