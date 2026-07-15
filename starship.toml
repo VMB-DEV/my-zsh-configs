@@ -2,8 +2,8 @@
 
 add_newline = true
 
-# First line: directory on left, git/kubernetes on right, then second line with character
-format = """$custom$time$directory$fill$git_branch$git_status$kubernetes$nodejs$python$rust$golang$line_break$character"""
+# First line: directory on left, git/kubernetes/tailscale on right, then second line with character
+format = """$custom$time$directory$fill$git_branch$git_status$kubernetes${custom.tailscale}$nodejs$python$rust$golang$line_break$character"""
 
 [directory]
 truncation_length = 100
@@ -57,6 +57,12 @@ format = '[$output](yellow)'
 command = "echo @"
 when = '[ -n "$SSH_CONNECTION" ]'
 format = '[$output](white)'
+
+[custom.tailscale]
+command = "tailscale status --self 2>/dev/null | awk '{print $2\" (\"$1\")\"}'"
+when = "tailscale ip -4 >/dev/null 2>&1"
+format = "[ 🌐 $output]($style) "
+style = "bold cyan"
 
 [custom.hostname]
 command = "hostname -s"
