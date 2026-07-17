@@ -35,6 +35,18 @@ zstyle ':fzf-tab:complete:*:*' fzf-preview '[[ -f $realpath ]] && cat $realpath 
 # Fuzzy-select a host from ~/.ssh/config and connect to it
 sshf() {
     local host
+    if [[ ! -f ~/.ssh/config ]]; then
+        echo "No SSH config found at ~/.ssh/config"
+        echo "Create it with:  touch ~/.ssh/config && chmod 600 ~/.ssh/config"
+        echo "Then add one block per host, e.g.:"
+        echo ""
+        echo "  Host <device-nickname>"
+        echo "    HostName <remote-IP>"
+        echo "    User <remote-user>"
+        echo ""
+        echo "After that, 'ssh mac' and sshf will work."
+        return 1
+    fi
     host=$(awk '$1 ~ /^[Hh]ost$/ {for (i = 2; i <= NF; i++) if ($i !~ /[*?!]/) print $i}' ~/.ssh/config 2>/dev/null | sort -u |
         fzf --prompt='ssh > ' --height=~30% --reverse \
             --preview 'ssh -G {} 2>/dev/null | grep -E "^(user|hostname|port) "' \
