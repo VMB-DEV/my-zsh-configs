@@ -32,6 +32,16 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color=always $realpath'
 zstyle ':fzf-tab:complete:*:*' fzf-preview '[[ -f $realpath ]] && cat $realpath 2>/dev/null || ls --color=always $realpath 2>/dev/null'
 
+# Fuzzy-select a host from ~/.ssh/config and connect to it
+sshf() {
+    local host
+    host=$(awk '$1 ~ /^[Hh]ost$/ {for (i = 2; i <= NF; i++) if ($i !~ /[*?!]/) print $i}' ~/.ssh/config 2>/dev/null | sort -u |
+        fzf --prompt='ssh > ' --height=~30% --reverse \
+            --preview 'ssh -G {} 2>/dev/null | grep -E "^(user|hostname|port) "' \
+            --preview-window=down:3:wrap) || return
+    ssh "$host"
+}
+
 # Set up fzf key bindings and fuzzy completion
 if [[ -z "$FZF_KEY_BINDINGS_PATH" ]]; then
   echo "Warning: FZF_KEY_BINDINGS_PATH is not set. Skipping fzf key bindings."
