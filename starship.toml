@@ -59,7 +59,7 @@ when = '[ -n "$SSH_CONNECTION" ]'
 format = '[$output](white)'
 
 [custom.tailscale]
-command = "tailscale status --peers=false 2>/dev/null | awk '{print $2\" (\"$1\")\"}'"
+command = "tailscale status --peers=false 2>/dev/null | awk '$1 ~ /^[0-9]/ {print $2\" (\"$1\")\"}'"
 when = "tailscale ip -4 >/dev/null 2>&1"
 format = "[ 🌐 $output]($style) "
 style = "bold cyan"
