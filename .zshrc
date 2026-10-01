@@ -118,6 +118,7 @@ alias bt="$MY_ZSH_CONFIG_FOLDER_PATH/go-cli/bluetooth-connection/bluetooth-conne
 alias etf="$MY_ZSH_CONFIG_FOLDER_PATH/go-cli/etf/etf"
 alias code="intellij"
 alias ni="npm install"
+alias fmysql='sed "s/\\\\040/ /g" ~/.mysql_history | fzf'
 
 alias switch-zsh='mv ~/.zshrc2 ~/.zshrc-tmp; mv ~/.zshrc ~/.zshrc2; mv ~/.zshrc-tmp ~/.zshrc'
 
