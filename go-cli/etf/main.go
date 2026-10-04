@@ -26,9 +26,9 @@ type quote struct {
 }
 
 var holdings = []holding{
-	{"FR0011871128", "SP500", 3},
-	{"FR0013412020", "Emerging", 4},
-	{"FR0013412038", "Europe", 6},
+	{"FR0011871128", "SP500", 1},
+	{"FR0013412020", "Emerging", 2},
+	{"FR0013412038", "Europe", 2},
 }
 
 var (
