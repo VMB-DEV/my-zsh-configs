@@ -119,6 +119,11 @@ alias etf="$MY_ZSH_CONFIG_FOLDER_PATH/go-cli/etf/etf"
 alias code="intellij"
 alias ni="npm install"
 alias fmysql='sed "s/\\\\040/ /g" ~/.mysql_history | fzf'
+alias gs='git status'
+alias gp='git pull'
+alias gf='git fetch'
+alias tf='tmux attach -t "=$(tmux ls -F "#{session_name}" | fzf)"'
+
 
 alias switch-zsh='mv ~/.zshrc2 ~/.zshrc-tmp; mv ~/.zshrc ~/.zshrc2; mv ~/.zshrc-tmp ~/.zshrc'
 
