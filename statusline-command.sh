@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Claude Code status line — mirrors Starship prompt style
+# Claude Code status line — two lines, mirrors Starship prompt style
 
 input=$(cat)
 
@@ -37,6 +37,8 @@ pct_color() {
   pct=$(printf "%.0f" "$1")
   if [ "$pct" -ge 90 ]; then
     printf '\033[31m'   # red
+  elif [ "$pct" -ge 80 ]; then
+    printf '\033[38;5;208m'   # orange
   elif [ "$pct" -ge 70 ]; then
     printf '\033[33m'   # yellow
   else
@@ -51,20 +53,16 @@ BLUE=$'\033[34m'
 MAGENTA=$'\033[35m'
 RED=$'\033[31m'
 PINK=$'\033[95m'
+ORANGE=$'\033[38;5;208m'
 
-# Build the status line
-parts=()
+# Build the status line: two lines, joined with " | "
+line1=()
+line2=()
 
-# User@host
-parts+=("${BOLD_YELLOW}${USER:-$(id -un)}@$(hostname -s)${RESET}")
+# Line 1: user@host | dir | branch | model effort
+line1+=("${BOLD_YELLOW}${USER:-$(id -un)}@$(hostname -s)${RESET}")
+line1+=("${BLUE}${display_dir}${RESET}")
 
-# Time
-parts+=("${DIM}$(date +%H:%M)${RESET}")
-
-# Directory
-parts+=("${BLUE}${display_dir}${RESET}")
-
-# Git info
 if [ -n "$git_branch" ]; then
   git_part="⎇  ${git_branch}"
   git_color="$GREEN"
@@ -72,21 +70,33 @@ if [ -n "$git_branch" ]; then
     git_part="${git_part} [${git_status_flags}]"
     git_color="$MAGENTA"
   fi
-  parts+=("${git_color}${git_part}${RESET}")
+  line1+=("${git_color}${git_part}${RESET}")
 fi
 
-# Model
 model_part="${RED}${model}${RESET}"
 [ -n "$effort" ] && model_part="${model_part} ${PINK}${effort}${RESET}"
-parts+=("$model_part")
+line1+=("$model_part")
 
-# Context usage
-if [ -n "$used_pct" ]; then
-  printf_pct=$(printf "%.0f" "$used_pct")
-  parts+=("$(pct_color "$used_pct")ctx:${printf_pct}%${RESET}")
+# Line 2: mode | hour | ctx | quota 5h | quota 7d
+# Vim mode (built-in indicator hidden via hideVimModeIndicator)
+vim_mode=$(echo "$input" | jq -r '.vim.mode // empty')
+if [ -n "$vim_mode" ]; then
+  case "$vim_mode" in
+    INSERT) vim_color="$ORANGE" ;;
+    VISUAL*) vim_color="$MAGENTA" ;;
+    *) vim_color="$BLUE" ;;
+  esac
+  GRAY=$'\033[90m'
+  line2+=("${GRAY}----${RESET} ${vim_color}${vim_mode}${RESET} ${GRAY}----${RESET}")
 fi
 
-# Rate limits from input JSON
+line2+=("${DIM}$(date +%H:%M)${RESET}")
+
+if [ -n "$used_pct" ]; then
+  printf_pct=$(printf "%.0f" "$used_pct")
+  line2+=("$(pct_color "$used_pct")ctx:${printf_pct}%${RESET}")
+fi
+
 five_hour_pct=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
 five_hour_reset=$(echo "$input" | jq -r '.rate_limits.five_hour.resets_at // empty')
 seven_day_pct=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')
@@ -97,16 +107,20 @@ if [ -n "$five_hour_pct" ]; then
     reset_str=" ($(date -d "@${five_hour_reset}" +%H:%M))"
   fi
   five_hour_pct_fmt=$(printf "%.0f" "$five_hour_pct")
-  parts+=("$(pct_color "$five_hour_pct")5h:${five_hour_pct_fmt}%${reset_str}${RESET}")
+  line2+=("$(pct_color "$five_hour_pct")5h:${five_hour_pct_fmt}%${reset_str}${RESET}")
 fi
 if [ -n "$seven_day_pct" ]; then
   seven_day_pct_fmt=$(printf "%.0f" "$seven_day_pct")
-  parts+=("$(pct_color "$seven_day_pct")7d:${seven_day_pct_fmt}%${RESET}")
+  line2+=("$(pct_color "$seven_day_pct")7d:${seven_day_pct_fmt}%${RESET}")
 fi
 
 sep="${DIM} | ${RESET}"
-out=""
-for part in "${parts[@]}"; do
-  out="${out:+${out}${sep}}${part}"
-done
-printf "%s" "$out"
+join_parts() {
+  local out=""
+  for part in "$@"; do
+    out="${out:+${out}${sep}}${part}"
+  done
+  printf "%s" "$out"
+}
+
+printf "%s\n%s" "$(join_parts "${line1[@]}")" "$(join_parts "${line2[@]}")"
