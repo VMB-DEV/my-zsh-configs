@@ -132,14 +132,14 @@ alias switch-zsh='mv ~/.zshrc2 ~/.zshrc-tmp; mv ~/.zshrc ~/.zshrc2; mv ~/.zshrc-
 
 alias hdr='mpv --vo=gpu-next --target-colorspace-hint --gpu-api=vulkan'
 
-# Copy the path of the Nth most recent screenshot (default: the latest) to the clipboard
-# Pasting that path in Claude Code attaches the image (ghostty binds ctrl+v to a text paste)
+# Copy the paths of the N most recent screenshots (default: 1) to the clipboard
+# Pasting those paths in Claude Code attaches the images (ghostty binds ctrl+v to a text paste)
 function cpsc() {
   local n=${1:-1}
   local -a screenshots=("$HOME/Pictures/Screenshots"/*.png(N.om))
 
   if [[ $n != <1-> ]]; then
-    echo "Usage: cpsc [N]  (1 = latest screenshot, 2 = the one before, ...)"
+    echo "Usage: cpsc [N]  (copies the N latest screenshots, 1 by default)"
     return 1
   fi
   if (( n > ${#screenshots} )); then
@@ -147,7 +147,8 @@ function cpsc() {
     return 1
   fi
 
-  wl-copy "${screenshots[n]}" && echo "Copied: ${screenshots[n]:t}"
+  screenshots=("${(@)screenshots[1,$n]}")
+  wl-copy "${(F)screenshots}" && print -l "Copied:" "${(@)screenshots:t}"
 }
 
 # Check if zig exist
