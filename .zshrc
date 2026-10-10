@@ -132,6 +132,23 @@ alias switch-zsh='mv ~/.zshrc2 ~/.zshrc-tmp; mv ~/.zshrc ~/.zshrc2; mv ~/.zshrc-
 
 alias hdr='mpv --vo=gpu-next --target-colorspace-hint --gpu-api=vulkan'
 
+# Copy the Nth most recent screenshot (default: the latest) to the clipboard as an image
+function cpsc() {
+  local n=${1:-1}
+  local -a screenshots=("$HOME/Pictures/Screenshots"/*.png(N.om))
+
+  if [[ $n != <1-> ]]; then
+    echo "Usage: cpsc [N]  (1 = latest screenshot, 2 = the one before, ...)"
+    return 1
+  fi
+  if (( n > ${#screenshots} )); then
+    echo "Only ${#screenshots} screenshot(s) in ~/Pictures/Screenshots"
+    return 1
+  fi
+
+  wl-copy --type image/png < "${screenshots[n]}" && echo "Copied: ${screenshots[n]:t}"
+}
+
 # Check if zig exist
 if [ ! -d "$HOME/zig" ]; then
   alias zig="$HOME/zig/zig"
