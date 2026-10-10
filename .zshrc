@@ -122,6 +122,9 @@ alias fmysql='sed "s/\\\\040/ /g" ~/.mysql_history | fzf'
 alias gs='git status'
 alias gp='git pull'
 alias gf='git fetch'
+alias gc='git checkout'
+alias ca='claude agents'
+alias cb='claude --bg'
 alias tf='tmux attach -t "=$(tmux ls -F "#{session_name}" | fzf)"'
 
 
