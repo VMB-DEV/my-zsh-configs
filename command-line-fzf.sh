@@ -54,6 +54,16 @@ sshf() {
     ssh "$host"
 }
 
+# Fuzzy-select a logind session and unlock it
+unlock() {
+    local line
+    line=$(loginctl list-sessions | awk 'NF == 0 {exit} 1' |
+        fzf --prompt='unlock > ' --height=~30% --reverse --header-lines=1 \
+            --preview 'loginctl show-session {1} -p Type -p State -p LockedHint -p Remote 2>/dev/null' \
+            --preview-window=down:4:wrap) || return
+    loginctl unlock-session "${${=line}[1]}"
+}
+
 # Set up fzf key bindings and fuzzy completion
 if [[ -z "$FZF_KEY_BINDINGS_PATH" ]]; then
   echo "Warning: FZF_KEY_BINDINGS_PATH is not set. Skipping fzf key bindings."
